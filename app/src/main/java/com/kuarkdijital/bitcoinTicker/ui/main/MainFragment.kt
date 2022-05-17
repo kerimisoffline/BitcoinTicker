@@ -50,7 +50,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     }
                     is MainViewModel.ResponseEvent.Failure-> {
                         binding.pbMain.isVisible = false
-
                     }
                     is MainViewModel.ResponseEvent.Loading-> {
                         binding.pbMain.isVisible = true
