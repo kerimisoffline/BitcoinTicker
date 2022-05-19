@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -24,13 +25,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private val binding by viewBindingWithBinder(MainFragmentBinding::bind)
-    private lateinit var viewModel: MainViewModel
+    private val viewModel : MainViewModel by activityViewModels()
     private val coinList = ArrayList<Coin>()
-    private var coinListAdapter = CoinListAdapter(coinList)
+    private lateinit var coinListAdapter : CoinListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        coinListAdapter = CoinListAdapter(viewModel,coinList)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +54,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     }
                     is MainViewModel.ResponseEvent.Loading-> {
                         binding.pbMain.isVisible = true
+                    }
+                    is MainViewModel.ResponseEvent.Empty-> {
+                        //
                     }
                 }
             }
