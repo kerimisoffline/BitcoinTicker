@@ -1,8 +1,8 @@
 package com.kuarkdijital.bitcoinTicker.di
 
 import com.kuarkdijital.bitcoinTicker.data.BaseApi
-import com.kuarkdijital.bitcoinTicker.main.DefaultMainRepository
-import com.kuarkdijital.bitcoinTicker.main.MainRepository
+import com.kuarkdijital.bitcoinTicker.data.repo.DefaultMainRepository
+import com.kuarkdijital.bitcoinTicker.data.repo.MainRepository
 import com.kuarkdijital.bitcoinTicker.util.DispactherProvider
 import dagger.Module
 import dagger.Provides

@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailFragmet">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/txtDetailHashing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="monospace"
+            android:text="Hashing" />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/txtDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_6sdp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="monospace"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/txtDetailImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="monospace"
+            android:text="Image" />
+
+        <TextView
+            android:id="@+id/txtDetailCurrentPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            android:fontFamily="monospace"
+            android:text="Current Price" />
+
+        <TextView
+            android:id="@+id/txtDetailLastVolume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            android:fontFamily="monospace"
+            android:text="Last Volume" />
+    </LinearLayout>
+
+</ScrollView>

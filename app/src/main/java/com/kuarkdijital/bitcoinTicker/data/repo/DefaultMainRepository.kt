@@ -1,6 +1,5 @@
-package com.kuarkdijital.bitcoinTicker.main
+package com.kuarkdijital.bitcoinTicker.data.repo
 
-import android.util.Log
 import com.kuarkdijital.bitcoinTicker.data.BaseApi
 import com.kuarkdijital.bitcoinTicker.data.models.CoinDetail
 import com.kuarkdijital.bitcoinTicker.data.models.SearchResponse

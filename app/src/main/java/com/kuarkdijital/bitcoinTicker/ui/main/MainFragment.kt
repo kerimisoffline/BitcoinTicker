@@ -1,18 +1,16 @@
 package com.kuarkdijital.bitcoinTicker.ui.main
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.kuarkdijital.bitcoinTicker.R
 import com.kuarkdijital.bitcoinTicker.data.models.Coin
-import com.kuarkdijital.bitcoinTicker.util.bindings.viewBindingWithBinder
 import com.kuarkdijital.bitcoinTicker.databinding.MainFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -24,19 +22,30 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         fun newInstance() = MainFragment()
     }
 
-    private val binding by viewBindingWithBinder(MainFragmentBinding::bind)
+    private var _binding : MainFragmentBinding?=null
+    private val binding get() = _binding!!
+
     private val viewModel : MainViewModel by activityViewModels()
     private val coinList = ArrayList<Coin>()
     private lateinit var coinListAdapter : CoinListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        coinListAdapter = CoinListAdapter(viewModel,coinList)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = MainFragmentBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        coinListAdapter = CoinListAdapter(viewModel,coinList)
         binding.rwCoinList.adapter = coinListAdapter
 
         viewModel.coinLiveData.observe(viewLifecycleOwner,{ coinList->
@@ -66,7 +75,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let { viewModel.fetchCoinList(it) }
-                    return true
+                    return false
                     //
                 }
 

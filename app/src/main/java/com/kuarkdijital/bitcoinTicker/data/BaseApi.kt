@@ -19,7 +19,7 @@ interface BaseApi {
         @Path("id") id:String,
         @Query("localization") localization:Boolean=false,
         @Query("tickers") tickers:Boolean=false,
-        @Query("market_data") market_data:Boolean=false,
+        @Query("market_data") market_data:Boolean=true,
         @Query("community_data") community_data:Boolean=false,
         @Query("developer_data") developer_data:Boolean=false,
         @Query("sparkline") sparkline:Boolean=false

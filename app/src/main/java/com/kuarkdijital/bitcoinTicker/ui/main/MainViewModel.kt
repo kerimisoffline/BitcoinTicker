@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kuarkdijital.bitcoinTicker.data.models.Coin
 import com.kuarkdijital.bitcoinTicker.data.models.CoinDetail
-import com.kuarkdijital.bitcoinTicker.main.MainRepository
+import com.kuarkdijital.bitcoinTicker.data.repo.MainRepository
 import com.kuarkdijital.bitcoinTicker.util.DispactherProvider
 import com.kuarkdijital.bitcoinTicker.util.Resource
 import com.kuarkdijital.bitcoinTicker.util.constant.Navigate
@@ -23,7 +23,6 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
 
     var coinLiveData = MutableLiveData<List<Coin>>()
-    var coinDetailLiveData = MutableLiveData<CoinDetail>()
     private val _navType = MutableStateFlow<NavTypeEvent>(NavTypeEvent.Empty)
     val navType: StateFlow<NavTypeEvent> = _navType
     private val _response = MutableStateFlow<ResponseEvent>(ResponseEvent.Empty)
@@ -55,23 +54,6 @@ class MainViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _response.value = ResponseEvent.Failure(coinListResponse.message!!)
-                }
-            }
-        }
-    }
-
-    fun fetchCoinDetail(
-        id:String
-    ) {
-        viewModelScope.launch(dispatcher.io) {
-            _response.value = ResponseEvent.Loading
-            when(val coinDetailResponse = repository.getCoinDetail(id)){
-                is Resource.Success -> {
-                    coinDetailLiveData.postValue(coinDetailResponse.data!!)
-                    _response.value = ResponseEvent.Success("success")
-                }
-                is Resource.Error -> {
-                    _response.value = ResponseEvent.Failure(coinDetailResponse.message!!)
                 }
             }
         }

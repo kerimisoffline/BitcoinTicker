@@ -1,4 +1,4 @@
-package com.kuarkdijital.bitcoinTicker.main
+package com.kuarkdijital.bitcoinTicker.data.repo
 
 import com.kuarkdijital.bitcoinTicker.data.models.CoinDetail
 import com.kuarkdijital.bitcoinTicker.data.models.SearchResponse
